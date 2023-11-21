@@ -1,0 +1,37 @@
+metadata:
+  name: "Enforce Least Privilege in Lambda IAM Roles"
+  id: "CKV_AWS_CUSTOM_010"
+  category: "security"
+  description: "Lambda function IAM roles must be restricted to the resources needed, following the principle of least privilege. The usage of asterisks in the actions and/or resources element of the policy is not allowed. Lambda functions should only access resources within the AWS account."
+  guidelines: "Ensure Lambda function IAM roles are tightly scoped to required resources and actions. Avoid using '*' in policy statements. Review AWS IAM and Lambda documentation for best practices."
+  severity: "MEDIUM"
+
+scope:
+  provider: "aws"
+
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "AWS::Lambda::Function"
+  attribute: "Role.PolicyDocument.Statement"
+  operator: "within"
+  value:
+    - "Effect": "Allow"
+      "Action": 
+        - not: "*"
+      "Resource": 
+        - not: "*"
+
+policy:
+  - rule_id: "CKV_AWS_CUSTOM_010"
+    conditions:
+      - and:
+          - "resource_type == AWS::Lambda::Function"
+          - not: "attribute.Role.PolicyDocument.Statement[*].Action == '*'"
+          - not: "attribute.Role.PolicyDocument.Statement[*].Resource == '*'"
+          - "attribute.Role.PolicyDocument.Statement[*].Effect == 'Allow'"
+          - "attribute.Role.PolicyDocument.Statement[*].Resource contains 'arn:aws:'"
+    actions:
+      - block
+    recommended_actions:
+      - "Review and update IAM roles for Lambda functions to ensure they follow the principle of least privilege and do not use asterisks in actions or resources. Roles should be scoped specifically to the needs of the Lambda function and should only access resources within the AWS account."

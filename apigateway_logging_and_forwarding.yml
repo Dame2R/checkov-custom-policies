@@ -1,0 +1,29 @@
+metadata:
+  name: "Ensure Logging to INFO Level and Forwarding to Compliance Bucket"
+  id: "CKV_AWS_CUSTOM_009"
+  category: "logging"
+  description: "It is mandatory to enable logging at the INFO level and forward these logs to the regional compliance bucket."
+  guidelines: "Check that all logging configurations are set to the INFO level and that logs are forwarded to the correct compliance bucket following the naming convention 'porsche-compliance-log-<your-account-id>-<your-aws-region>'. Refer to AWS documentation for CloudWatch Logs and S3 bucket configurations."
+  severity: "LOW"
+
+scope:
+  provider: "aws"
+
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "AWS::Logs::LogGroup"
+  attribute: "retentionInDays"
+  operator: "exists"
+
+policy:
+  - rule_id: "CKV_AWS_CUSTOM_009"
+    conditions:
+      - and:
+          - "resource_type == AWS::Logs::LogGroup"
+          - "attribute.logLevel == 'INFO'"
+          - "attribute.destination matches 'porsche-compliance-log-*'"
+    actions:
+      - block
+    recommended_actions:
+      - "Ensure all log groups are set to the INFO level and configure log forwarding to the designated compliance bucket following the naming convention 'porsche-compliance-log-<your-account-id>-<your-aws-region>'."

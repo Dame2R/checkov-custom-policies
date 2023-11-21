@@ -1,0 +1,19 @@
+metadata:
+  name: "Mandatory Encryption for Cache Data"
+  id: "CKV_AWS_CUSTOM_008"
+  category: "encryption"
+  description: "All cache data must be encrypted to ensure data security and compliance."
+  guidelines: "Review configurations for cache services such as Amazon ElastiCache to ensure that data encryption is enabled both at rest and in transit."
+  severity: "HIGH"
+
+scope:
+  provider: "aws"
+
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "AWS::ElastiCache::CacheCluster"
+    - "AWS::ElastiCache::ReplicationGroup"
+  attribute: ["AtRestEncryptionEnabled", "TransitEncryptionEnabled"]
+  operator: "equals"
+  value: true

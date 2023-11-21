@@ -1,0 +1,34 @@
+metadata:
+  name: "Enforce Least Privilege in IAM Policies"
+  id: "CKV_AWS_CUSTOM_006"
+  category: "identity"
+  description: "Ensure IAM policies grant minimal necessary permissions. Avoid overly permissive policies."
+  guidelines: "Review IAM policies to ensure they follow the principle of least privilege. Avoid using wildcards for actions and resources unless absolutely necessary."
+  severity: "MEDIUM"
+
+scope:
+  provider: "aws"
+
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "AWS::IAM::Policy"
+  attribute: "PolicyDocument.Statement"
+  operator: "within"
+  value: 
+    - "Effect": "Allow"
+      "Action": "*"
+      "Resource": "*"
+
+policy:
+  - rule_id: "CKV_AWS_CUSTOM_006"
+    conditions:
+      - and:
+          - "resource_type == AWS::IAM::Policy"
+          - "attribute.PolicyDocument.Statement[*].Effect == 'Allow'"
+          - "attribute.PolicyDocument.Statement[*].Action == '*'"
+          - "attribute.PolicyDocument.Statement[*].Resource == '*'"
+    actions:
+      - warn
+    recommended_actions:
+      - "Review IAM policies to ensure they are scoped to the minimum necessary permissions. Avoid using '*' in Actions and Resources."

@@ -1,0 +1,29 @@
+metadata:
+  name: "Prohibit Unauthenticated Lambda Function URLs"
+  id: "CKV_AWS_CUSTOM_011"
+  category: "security"
+  description: "AWS Lambda function URLs must not use the authentication type 'NONE'."
+  guidelines: "Ensure all Lambda function URLs are configured with an authentication method other than 'NONE'. Unauthenticated access can pose security risks."
+  severity: "LOW"
+
+scope:
+  provider: "aws"
+
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "AWS::Lambda::FunctionUrl"
+  attribute: "AuthType"
+  operator: "equals"
+  value: "NONE"
+
+policy:
+  - rule_id: "CKV_AWS_CUSTOM_011"
+    conditions:
+      - and:
+          - "resource_type == AWS::Lambda::FunctionUrl"
+          - "attribute.AuthType == 'NONE'"
+    actions:
+      - block
+    recommended_actions:
+      - "Update Lambda function URL configurations to use an authentication method other than 'NONE'."

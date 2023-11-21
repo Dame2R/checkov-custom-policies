@@ -1,0 +1,30 @@
+metadata:
+  name: "Ensure S3 bucket logging is enabled and directed to the compliance bucket"
+  id: "CKV_AWS_CUSTOM_005"
+  category: "storage"
+  description: "S3 buckets should have logging enabled, with logs being sent to a predefined compliance bucket in the same region."
+  guidelines: "Enabling logging on S3 buckets helps in auditing and compliance monitoring. Logs should be directed to a specific compliance bucket with a standardized naming convention."
+  severity: "LOW"
+
+scope:
+  provider: "aws"
+
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "AWS::S3::Bucket"
+  attribute: "LoggingConfiguration"
+  operator: "exists"
+
+policy:
+  - rule_id: "CKV_AWS_CUSTOM_005"
+    conditions:
+      - and:
+          - "resource_type == AWS::S3::Bucket"
+          - "attribute.LoggingConfiguration != null"
+          - "attribute.LoggingConfiguration.DestinationBucketName == regex('porsche-compliance-log-\\d+-[a-z0-9-]+')"
+          - "attribute.LoggingConfiguration.Prefix == 'S3/${resource.Properties.BucketName}/'"
+    actions:
+      - block
+    recommended_actions:
+      - "Enable logging for the S3 bucket and ensure it is directed to the compliance bucket with the appropriate prefix format."

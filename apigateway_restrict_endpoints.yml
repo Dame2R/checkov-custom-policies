@@ -1,0 +1,30 @@
+metadata:
+  name: "Restrict API Gateway Endpoints Access"
+  id: "CKV_AWS_CUSTOM_007"
+  category: "networking"
+  description: "API Gateway endpoints should be restricted using resource policies based on CIDRs, VPCs, VPC endpoints, or AWS principals."
+  guidelines: "Ensure your API Gateway resource policies restrict access appropriately. Use CIDRs, VPCs, VPC endpoints, or specific AWS principals for access control."
+  severity: "HIGH"
+
+scope:
+  provider: "aws"
+
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "AWS::ApiGateway::RestApi"
+  attribute: "Policy"
+  operator: "exists"
+
+policy:
+  - rule_id: "CKV_AWS_CUSTOM_007"
+    conditions:
+      - and:
+          - "resource_type == AWS::ApiGateway::RestApi"
+          - "attribute.Policy != null"
+          - "attribute.Policy contains 'Condition'"
+          - "attribute.Policy contains one of ['IpAddress', 'Vpc', 'VpcEndpoint', 'AwsAccount', 'AwsArn']"
+    actions:
+      - warn
+    recommended_actions:
+      - "Review and update the API Gateway resource policies to ensure they restrict access based on CIDRs, VPCs, VPC endpoints, or specific AWS principals."
