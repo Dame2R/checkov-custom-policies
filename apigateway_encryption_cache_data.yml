@@ -9,10 +9,19 @@ scope:
   provider: "aws"
 
 definition:
-  cond_type: "attribute"
-  resource_types:
-    - "AWS::ElastiCache::CacheCluster"
-    - "AWS::ElastiCache::ReplicationGroup"
-  attribute: ["AtRestEncryptionEnabled", "TransitEncryptionEnabled"]
-  operator: "equals"
-  value: true
+  and:
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::ElastiCache::CacheCluster"
+        - "AWS::ElastiCache::ReplicationGroup"
+      attribute: "AtRestEncryptionEnabled"
+      operator: "equals"
+      value: true
+
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::ElastiCache::CacheCluster"
+        - "AWS::ElastiCache::ReplicationGroup"
+      attribute: "TransitEncryptionEnabled"
+      operator: "equals"
+      value: true
