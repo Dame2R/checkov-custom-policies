@@ -2,32 +2,31 @@ metadata:
   name: "Ensure S3 buckets are not publicly shared with other AWS accounts"
   id: "CKV_AWS_CUSTOM_002"
   category: "storage"
-  description: "S3 buckets should not have policies that allow cross-account access unless specifically required."
   guidelines: "Review the S3 bucket policies to ensure they do not grant permissions to other AWS accounts. For more information, refer to the AWS documentation on S3 bucket policies at https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-policies.html"
-  severity: "MEDIUM"
+  severity: "medium"
 
 scope:
   provider: "aws"
 
 definition:
-  cond_type: "attribute"
-  resource_types:
-    - "AWS::S3::BucketPolicy"
-  attribute: "PolicyDocument.Statement"
-  operator: "within"
-  value: 
-    - "Effect": "Allow"
-      "Principal": "*"
-      "Action": "s3:*"
+  and:
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::S3::BucketPolicy"
+      attribute: "PolicyDocument.Statement.Principal"
+      operator: "not_equals"
+      value: "*"
 
-policy:
-  - rule_id: "CKV_AWS_CUSTOM_002"
-    conditions:
-      - and:
-          - "resource_type == AWS::S3::BucketPolicy"
-          - "attribute.PolicyDocument.Statement[*].Effect == 'Allow'"
-          - "attribute.PolicyDocument.Statement[*].Principal.AWS == '*'"
-    actions:
-      - block
-    recommended_actions:
-      - "Ensure that your S3 buckets do not allow cross-account access in their bucket policies. If cross-account access is necessary, ensure it is done securely and with the least privilege necessary."
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::S3::BucketPolicy"
+      attribute: "PolicyDocument.Statement.Action"
+      operator: "equals"
+      value: "s3:*"
+
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::S3::BucketPolicy"
+      attribute: "PolicyDocument.Statement.Effect"
+      operator: "equals"
+      value: "Allow"
