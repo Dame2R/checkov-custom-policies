@@ -3,7 +3,7 @@ metadata:
   id: "CKV_AWS_CUSTOM_008"
   category: "general"
   guidelines: "Review configurations for cache services such as Amazon ElastiCache to ensure that data encryption is enabled both at rest and in transit."
-  severity: "HIGH"
+  severity: "high"
 
 scope:
   provider: "aws"
