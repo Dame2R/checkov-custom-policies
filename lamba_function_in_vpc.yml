@@ -2,9 +2,8 @@ metadata:
   name: "Require Lambda Functions in VPC for Specific Resources, Except for Serverless Architectures"
   id: "CKV_AWS_CUSTOM_012"
   category: "networking"
-  description: "Lambda functions should be in a VPC when accessing VPC-only resources, except in serverless architectures where VPC is not necessary."
   guidelines: "Ensure Lambda functions are part of a VPC when they need to access VPC-only resources. Serverless architectures that don't require VPC access are exempt from this requirement."
-  severity: "MEDIUM"
+  severity: "medium"
 
 scope:
   provider: "aws"
