@@ -1,10 +1,9 @@
 metadata:
   name: "Ensure DynamoDB tables and DAX are encrypted with CMK"
   id: "CKV_AWS_CUSTOM_003"
-  category: "encryption"
-  description: "DynamoDB tables and DAX clusters should be encrypted with a Customer Master Key (CMK)."
+  category: "general"
   guidelines: "Review DynamoDB and DAX configurations to ensure they are encrypted using a CMK. https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAXEncryptionAtRest.html  /  https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/EncryptionAtRest.html"
-  severity: "HIGH"
+  severity: "high"
 scope:
   provider: "aws"
 
