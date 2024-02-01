@@ -2,8 +2,8 @@ metadata:
   name: "Enforce Least Privilege in Lambda IAM Roles"
   id: "CKV_AWS_CUSTOM_010"
   category: "iam"
-  guidelines: "Ensure Lambda function IAM roles are tightly scoped to required resources and actions. Avoid using '*' in policy statements. Review AWS IAM and Lambda documentation for best practices."
-  severity: "medium"
+  guidelines: "Ensure Lambda function uses IAM roles which are tightly scoped to required resources and actions. Avoid using '*' in policy statements. Review AWS IAM and Lambda documentation for best practices."
+  severity: "high"
 
 scope:
   provider: "aws"
@@ -11,22 +11,56 @@ scope:
 definition:
   and:
     - cond_type: "attribute"
-      resource_types:
+      resource_types: 
         - "AWS::Lambda::Function"
-      attribute: "Role.PolicyDocument.Statement.Effect"
-      operator: "equals"
-      value: "Allow"
+      attribute: "Properties.Role"
+      operator: "exists"
+      # Check if the Lambda function has an execution role specified.
 
-    - cond_type: "attribute"
-      resource_types:
-        - "AWS::Lambda::Function"
-      attribute: "Role.PolicyDocument.Statement.Action"
-      operator: "not_equals"
-      value: "*"
+    - and:
+        - cond_type: "connection"
+          resource_types: 
+            - "AWS::Lambda::Function"
+          connected_resource_types: 
+            - "AWS::IAM::Role"
+          operator: "exists"
+          # Check if the execution role exists.
 
-    - cond_type: "attribute"
-      resource_types:
-        - "AWS::Lambda::Function"
-      attribute: "Role.PolicyDocument.Statement.Resource"
-      operator: "not_equals"
-      value: "*"
+        - cond_type: "attribute"
+          resource_types: 
+            - "AWS::IAM::Role"
+          attribute: "AssumeRolePolicyDocument.Statement"
+          operator: "contains"
+          value:
+            Effect: "Allow"
+            Principal:
+              Service: "lambda.amazonaws.com"
+            Action: "sts:AssumeRole"
+          # Ensures the IAM role's trust policy is specific to Lambda.
+
+        - cond_type: "attribute"
+          resource_types: 
+            - "AWS::IAM::Role"
+          attribute: "Policies"
+          operator: "not_contains"
+          value: "*"
+          # Ensure no inline policies grant broad permissions.
+
+        - cond_type: "connection"
+          resource_types: 
+            - "AWS::IAM::Role"
+          connected_resource_types: 
+            - "AWS::IAM::Policy"
+          operator: "exists"
+          # Check for associated IAM policies.
+
+        - cond_type: "attribute"
+          resource_types:
+            - "AWS::IAM::Policy"
+          attribute: "PolicyDocument.Statement"
+          operator: "not_contains"
+          value: 
+            Effect: "Allow"
+            Action: "*"
+            Resource: "*"
+          # Ensure associated policies do not grant broad permissions.

@@ -1,0 +1,27 @@
+metadata:
+  name: "Ensure AWS Lambda function URLs require authentication"
+  id: "CKV_AWS_CUSTOM_018"
+  category: "networking"
+  guidelines: "Lambda functions exposed via URLs must enforce authentication. The AuthType should not be set to 'NONE' to avoid unauthenticated access, which could lead to unpredicted costs or data exfiltration."
+  severity: "critical"
+
+scope:
+  provider: "aws"
+
+definition:
+  and:
+    - cond_type: "connection"
+      resource_types: 
+        - "AWS::Lambda::Function"
+      connected_resource_types: 
+        - "AWS::Lambda::Url"
+      operator: "exists"
+      # Checks for a connection between the Lambda function and its URL configuration.
+
+    - cond_type: "attribute"
+      resource_types: 
+        - "AWS::Lambda::Url"
+      attribute: "AuthType"
+      operator: "not_equals"
+      value: "NONE"
+      # Ensures the AuthType for the connected Lambda function URL is not set to 'NONE'.
