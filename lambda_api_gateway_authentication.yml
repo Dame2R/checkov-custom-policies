@@ -1,0 +1,58 @@
+metadata:
+  name: "Ensure Lambda functions triggered by API Gateway have authentication"
+  id: "CKV_AWS_CUSTOM_017"
+  category: "api_security"
+  guidelines: "Lambda functions triggered by API Gateway must ensure the triggering API Gateway has appropriate authentication mechanisms, such as IAM permissions, Amazon Cognito user pools, Lambda authorizers, or API keys. This policy checks for the presence of authentication configurations in associated API Gateway resources."
+  severity: "high"
+
+scope:
+  provider: "aws"
+
+definition:
+  and:
+    - cond_type: "connection"
+      resource_types: 
+        - "AWS::Lambda::Function"
+      connected_resource_types: 
+        - "AWS::ApiGateway::Method"
+      operator: "exists"
+      # Checks if an API Gateway method is connected to the Lambda function.
+
+    - cond_type: "attribute"
+      resource_types: 
+        - "AWS::ApiGateway::Method"
+      attribute: "AuthorizationType"
+      operator: "is_not_empty"
+      # Ensures the AuthorizationType is not empty.
+
+    - or:
+        - cond_type: "attribute"
+          resource_types: 
+            - "AWS::ApiGateway::Method"
+          attribute: "AuthorizerId"
+          operator: "is_not_empty"
+          # Checks that an AuthorizerId is specified, indicating custom or Cognito authorizer.
+
+        - cond_type: "connection"
+          resource_types: 
+            - "AWS::ApiGateway::RestApi"
+          connected_resource_types: 
+            - "AWS::IAM::Role"
+          operator: "exists"
+          # Ensures an IAM Role is connected, implying IAM-based authentication.
+
+        - cond_type: "connection"
+          resource_types: 
+            - "AWS::ApiGateway::RestApi"
+          connected_resource_types: 
+            - "AWS::Cognito::UserPool"
+          operator: "exists"
+          # Checks for a connected Amazon Cognito user pool, indicating Cognito-based authentication.
+
+        - cond_type: "attribute"
+          resource_types: 
+            - "AWS::ApiGateway::Method"
+          attribute: "ApiKeyRequired"
+          operator: "equals"
+          value: true
+          # Verifies that API key authentication is required if applicable.

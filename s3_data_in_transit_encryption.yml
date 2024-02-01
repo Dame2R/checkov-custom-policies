@@ -9,7 +9,7 @@ scope:
   provider: "aws"
 
 definition:
-  - and:
+  and:
       - cond_type: "attribute"
         resource_types:
           - "AWS::S3::BucketPolicy"
