@@ -1,0 +1,26 @@
+metadata:
+  name: "Ensure Lambda functions have concurrency execution limits"
+  id: "CKV_AWS_CUSTOM_022"
+  category: "convention"
+  guidelines: "Lambda functions should have a concurrency execution limit to prevent reaching account-level concurrent execution limits."
+  severity: "medium"
+
+scope:
+  provider: "aws"
+
+definition:
+  and:
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::Lambda::Function"
+      attribute: "ReservedConcurrentExecutions"
+      operator: "exists"
+      # Checks if the Lambda Function has a concurrency execution limit defined.
+
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::Lambda::Function"
+      attribute: "ReservedConcurrentExecutions"
+      operator: "is_not_empty"
+      # Ensures the concurrency execution limit has an individual value.
+

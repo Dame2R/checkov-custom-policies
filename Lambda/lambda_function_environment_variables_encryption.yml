@@ -1,0 +1,25 @@
+metadata:
+  name: "Ensure sensitive Lambda environment variables are encrypted with a CMK-KMS key"
+  id: "CKV_AWS_CUSTOM_026"
+  category: "encryption"
+  guidelines: "Environment variables for Lambda functions containing sensitive information should be encrypted using a KMS CMK."
+  severity: "medium"
+
+scope:
+  provider: "aws"
+
+definition:
+  and:
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::Lambda::Function"
+      attribute: "Environment.KmsKeyArn"
+      operator: "exists"
+      # Checks if a CMK is defined.
+
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::Lambda::Function"
+      attribute: "Environment.KmsKeyArn"
+      operator: "is_not_empty"
+      #Ensures that the CMK value is not empty.

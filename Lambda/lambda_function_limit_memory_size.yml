@@ -1,0 +1,32 @@
+metadata:
+  name: "Ensure Lambda functions have memory size within recommended limits"
+  id: "CKV_AWS_CUSTOM_024"
+  category: "convention"
+  guidelines: "Lambda functions should have memory size configured to match the workload requirements without being over-provisioned. This policy ensures a memory size is set and lays in an accepted range."
+  severity: "medium"
+
+scope:
+  provider: "aws"
+
+definition:
+  and:
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::Lambda::Function"
+      attribute: "MemorySize"
+      operator: "exists"
+      # Ensures a memory size is set in the IaC Template.
+
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::Lambda::Function"
+      attribute: "MemorySize"
+      operator: "greater_than_or_equal"
+      value: 128
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::Lambda::Function"
+      attribute: "MemorySize"
+      operator: "less_than_or_equal"
+      value: 3008
+      # Ensures the range is from the minimum (128MB) to the maximum (3008MB) allowed by AWS Lambda.

@@ -1,0 +1,18 @@
+metadata:
+  name: "Ensure tracing is enabled for Lambda functions"
+  id: "CKV_AWS_CUSTOM_025"
+  category: "logging"
+  guidelines: "Lambda functions should have AWS X-Ray or similar tracing enabled for observability and performance monitoring."
+  severity: "low"
+
+scope:
+  provider: "aws"
+
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "AWS::Lambda::Function"
+  attribute: "TracingConfig.Mode"
+  operator: "equals"
+  value: "Active"
+  # Ensures a tracing mode is enabled.

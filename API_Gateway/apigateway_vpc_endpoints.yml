@@ -1,0 +1,42 @@
+metadata:
+  name: "Ensure API Gateway is associated with a VPC endpoint"
+  id: "CKV_AWS_CUSTOM_034"
+  category: "api_security"
+  guidelines: "Associating API Gateway with a VPC endpoint enhances security by keeping traffic within the AWS network."
+  severity: "high"
+
+scope:
+  provider: "aws"
+
+definition:
+  or:
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::ApiGateway::RestApi"
+      attribute: "EndpointConfiguration.Types"
+      operator: "not_contains"
+      value: "PRIVATE"
+      # If the endpoints are not private, a VPC endpoint can't be configured.
+
+    and:
+      - cond_type: "attribute"
+        resource_types:
+          - "AWS::ApiGateway::RestApi"
+        attribute: "EndpointConfiguration.Types"
+        operator: "contains"
+        value: "PRIVATE"
+        # Ensures API endpoints are private
+
+      - cond_type: "attribute"
+        resource_types:
+          - "AWS::ApiGateway::RestApi"
+        attribute: "EndpointConfiguration.VpcEndpointIds"
+        operator: "exists"
+        # Checks if VPC Endpoints are defined
+      
+      - cond_type: "attribute"
+        resource_types:
+          - "AWS::ApiGateway::RestApi"
+        attribute: "EndpointConfiguration.VpcEndpointIds"
+        operator: "is_not_empty"
+        # Ensures a definition of VPC Endpoints

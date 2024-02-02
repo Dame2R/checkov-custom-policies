@@ -1,0 +1,34 @@
+metadata:
+  name: "Ensure Lambda functions have an execution timeout set within a reasonable range"
+  id: "CKV_AWS_CUSTOM_023"
+  category: "convention"
+  guidelines: "Lambda functions should have an execution timeout set within a reasonable range. A timeout should be no less than 1 second and no more than 900 seconds (15 minutes), in accordance with AWS best practices."
+  severity: "medium"
+
+scope:
+  provider: "aws"
+
+definition:
+  and:
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::Lambda::Function"
+      attribute: "Timeout"
+      operator: "exists"
+      # Ensures an individual Timeout is set 
+
+
+    - and:
+      - cond_type: "attribute"
+        resource_types:
+          - "AWS::Lambda::Function"
+        attribute: "Timeout"
+        operator: "greater_than_or_equal"
+        value: 1
+      - cond_type: "attribute"
+        resource_types:
+          - "AWS::Lambda::Function"
+        attribute: "Timeout"
+        operator: "less_than_or_equal"
+        value: 900
+        # Usual timeout ranges are limited at max. 15 minutes. Ensuring the timeout range is between 1 sec and 15 minutes.

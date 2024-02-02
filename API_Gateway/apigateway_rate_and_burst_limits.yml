@@ -1,0 +1,39 @@
+metadata:
+  name: "Ensure API Gateway has rate and burst limit configurations"
+  id: "CKV_AWS_CUSTOM_031"
+  category: "api_security"
+  guidelines: "Setting rate and burst limits on API Gateway is essential to protect backend services from traffic spikes."
+  severity: "high"
+
+scope:
+  provider: "aws"
+
+definition:
+  and:
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::ApiGateway::UsagePlan"
+      attribute: "Throttle.RateLimit"
+      operator: "exists"
+      # Checks if rate limit is defined.
+
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::ApiGateway::UsagePlan"
+      attribute: "Throttle.RateLimit"
+      operator: "is_not_empty"
+      # Ensures rate limit is not empty.
+
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::ApiGateway::UsagePlan"
+      attribute: "Throttle.BurstLimit"
+      operator: "exists"
+      # Checks if burst limit is defined.
+
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::ApiGateway::UsagePlan"
+      attribute: "Throttle.BurstLimit"
+      operator: "is_not_empty"
+      # Ensures burst limit is not empty.

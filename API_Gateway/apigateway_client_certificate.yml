@@ -1,0 +1,25 @@
+metadata:
+  name: "Ensure API Gateway stages are associated with a client certificate"
+  id: "CKV_AWS_CUSTOM_036"
+  category: "api_security"
+  guidelines: "Associating a client certificate with API Gateway stages ensures secure TLS communication between the API Gateway and backend integrations."
+  severity: "high"
+
+scope:
+  provider: "aws"
+
+definition:
+  and:
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::ApiGateway::Stage"
+      attribute: "ClientCertificateId"
+      operator: "exists"
+      # Checks if client certificate is being used.
+
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::ApiGateway::Stage"
+      attribute: "ClientCertificateId"
+      operator: "is_not_empty"
+      # Ensures the

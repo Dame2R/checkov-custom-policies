@@ -1,0 +1,34 @@
+metadata:
+  name: "Ensure API Gateway uses a custom domains with TLS 1.2"
+  id: "CKV_AWS_CUSTOM_030"
+  category: "api_security"
+  guidelines: "It is mandatory to use custom domain names. Furthermore using at least TLS 1.2 for custom domains in API Gateway is critical for maintaining secure connections."
+  severity: "critical"
+
+scope:
+  provider: "aws"
+
+definition:
+  and:
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::ApiGateway::DomainName"
+      attribute: "DomainName"
+      operator: "is_not_empty"
+      # Ensures a domain name is being set.
+
+
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::ApiGateway::DomainName"
+      attribute: "SecurityPolicy"
+      operator: "exists"
+      # Checks if the security policy is defined.
+
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::ApiGateway::DomainName"
+      attribute: "SecurityPolicy"
+      operator: "equals"
+      value: "TLS_1_2"
+      # Ensures TLS 1.2 is used for custom domains.

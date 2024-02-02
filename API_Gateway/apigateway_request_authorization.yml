@@ -1,0 +1,29 @@
+metadata:
+  name: "Ensure API Gateway endpoints require authorization"
+  id: "CKV_AWS_CUSTOM_032"
+  category: "api_security"
+  guidelines: "It is mandatory that every API endpoint is protected by an authorizer or an API key for security reasons."
+  severity: "high"
+
+scope:
+  provider: "aws"
+
+definition:
+  or:
+  # One of both authorization types has to be ensured.
+
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::ApiGateway::Method"
+      attribute: "AuthorizationType"
+      operator: "not_equals"
+      value: "NONE"
+      # Ensures usage of a valid authorization type.
+
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::ApiGateway::Method"
+      attribute: "ApiKeyRequired"
+      operator: "equals"
+      value: true
+      # Ensures usage of an API key.

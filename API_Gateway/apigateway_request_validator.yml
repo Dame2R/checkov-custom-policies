@@ -1,0 +1,25 @@
+metadata:
+  name: "Ensure API Gateway methods have request parameter validation enabled"
+  id: "CKV_AWS_CUSTOM_035"
+  category: "api_security"
+  guidelines: "Enabling request parameter validation for API Gateway methods prevents malformed or malicious requests."
+  severity: "high"
+
+scope:
+  provider: "aws"
+
+definition:
+  and:
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::ApiGateway::Method"
+      attribute: "RequestValidatorId"
+      operator: "exists"
+      # Checks if a request validator is used.
+
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::ApiGateway::Method"
+      attribute: "RequestValidatorId"
+      operator: "is_not_empty"
+      # Ensures the request validator is not empty.

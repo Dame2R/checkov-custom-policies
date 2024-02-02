@@ -1,0 +1,26 @@
+metadata:
+  name: "Ensure DynamoDB tables have backup and disaster recovery capabilities"
+  id: "CKV_AWS_CUSTOM_037"
+  category: "backup_and_recovery"
+  guidelines: "DynamoDB tables should have backup capabilities enabled to ensure data can be restored in case of a disaster."
+  severity: "high"
+
+scope:
+  provider: "aws"
+
+definition:
+  and:
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::DynamoDB::Table"
+      attribute: "PointInTimeRecoverySpecification.PointInTimeRecoveryEnabled"
+      operator: "exists"
+      # Checks if point in time/continous recovery is mentioned.
+
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::DynamoDB::Table"
+      attribute: "PointInTimeRecoverySpecification.PointInTimeRecoveryEnabled"
+      operator: "equals"
+      value: true
+      # Ensures the usage of point in time recovery.

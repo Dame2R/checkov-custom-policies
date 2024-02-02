@@ -1,0 +1,36 @@
+metadata:
+  name: "Ensure API Gateway cache data is encrypted"
+  id: "CKV_AWS_CUSTOM_033"
+  category: "api_security"
+  guidelines: "Encrypting cache data for API Gateway is mandatory when a cache is used."
+  severity: "medium"
+
+scope:
+  provider: "aws"
+
+definition:
+  or:
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::ApiGateway::Stage"
+      attribute: "MethodSettings.CachingEnabled"
+      operator: "equals"
+      value: false
+      # If caching is disabled, no data encryption is required.
+
+    and:
+      - cond_type: "attribute"
+        resource_types:
+          - "AWS::ApiGateway::Stage"
+        attribute: "MethodSettings.CachingEnabled"
+        operator: "equals"
+        value: true
+        # Checks if caching is enabled.
+
+      - cond_type: "attribute"
+        resource_types:
+          - "AWS::ApiGateway::Stage"
+        attribute: "MethodSettings.CachingConfig.DataEncrypted"
+        operator: "equals"
+        value: true
+        # Ensures caching data is encrypted.

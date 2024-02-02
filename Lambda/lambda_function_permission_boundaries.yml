@@ -1,0 +1,26 @@
+metadata:
+  name: "Ensure Lambda functions have permissions boundaries set"
+  id: "CKV_AWS_CUSTOM_021"
+  category: "iam"
+  guidelines: "Lambda functions should have permissions boundaries defined to limit the maximum permissions that the function's role can grant or delegate."
+  severity: "high"
+
+scope:
+  provider: "aws"
+
+definition:
+  and:
+    - cond_type: "connection"
+      resource_types:
+        - "AWS::Lambda::Function"
+      connected_resource_types: 
+        - "AWS::IAM::Role"
+      operator: "exists"
+      # Checks if Lambda Function has a Execution Role connected to it.
+
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::IAM::Role"
+      attribute: "PermissionsBoundary"
+      operator: "exists"
+      # Ensures there is a permissions boundary defined for the function's role.

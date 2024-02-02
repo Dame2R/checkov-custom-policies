@@ -1,0 +1,25 @@
+metadata:
+  name: "Ensure API Gateway has a secure resource policy"
+  id: "CKV_AWS_CUSTOM_028"
+  category: "api_security"
+  guidelines: "API Gateway must have resource policies that restrict access to ensure secure invocation of APIs."
+  severity: "high"
+
+scope:
+  provider: "aws"
+
+definition:
+  and:
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::ApiGateway::RestApi"
+      attribute: "Policy"
+      operator: "exists"
+      # Checks if API Gateway uses a Policy
+
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::ApiGateway::RestApi"
+      attribute: "Policy"
+      operator: "is_not_empty"
+      # Ensures that the policy is not empty.

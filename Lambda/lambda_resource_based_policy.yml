@@ -1,0 +1,35 @@
+metadata:
+  name: "Ensure Lambda function policies restrict invocation to specific principals without wildcards"
+  id: "CKV_AWS_CUSTOM_016"
+  category: "general_security"
+  guidelines: "Lambda function policies should explicitly define principals and actions, avoiding the use of wildcards. This ensures that only specified services or entities can invoke the Lambda function, adhering to the principle of least privilege."
+  severity: "high"
+
+scope:
+  provider: "aws"
+
+definition:
+  and:
+    - cond_type: "attribute"
+      resource_types: 
+        - "AWS::Lambda::Permission"
+      attribute: "Principal.Service"
+      operator: "not_equals"
+      value: "*"
+      # Ensures the Principal field does not use a wildcard, specifying a particular service.
+
+    - cond_type: "attribute"
+      resource_types: 
+        - "AWS::Lambda::Permission"
+      attribute: "Action"
+      operator: "equals"
+      value: "lambda:InvokeFunction"
+      # Ensures the Action is specifically set to lambda:InvokeFunction.
+
+    - cond_type: "attribute"
+      resource_types: 
+        - "AWS::Lambda::Permission"
+      attribute: "FunctionName"
+      operator: "regex_match"
+      value: "^arn:(aws[a-zA-Z-]*):lambda:[a-z]{2}-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_]+$"
+      # Ensures the FunctionName field specifies a specific Lambda function ARN, not a wildcard.
