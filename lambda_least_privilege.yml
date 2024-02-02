@@ -51,12 +51,14 @@ definition:
             - "AWS::IAM::Role"
           connected_resource_types: 
             - "AWS::IAM::Policy"
+            - "AWS::IAM::ManagedPolicy"
           operator: "exists"
           # Check for associated IAM policies.
 
         - cond_type: "attribute"
           resource_types:
             - "AWS::IAM::Policy"
+            - "AWS::IAM::ManagedPolicy"
           attribute: "PolicyDocument.Statement"
           operator: "not_contains"
           value: 

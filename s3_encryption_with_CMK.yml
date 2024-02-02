@@ -19,13 +19,21 @@ definition:
       # Check if the S3 bucket is tagged with 'GITC-DataClassification' key set to 'public' to not enforce encryption with CMK.
 
     - and:
-        - cond_type: "attribute"
-          resource_types:
-            - "AWS::S3::Bucket"
-          attribute: "Tags.GITC-DataClassification"
-          operator: "not_equals"
-          value: "public"
-          # Check if the S3 bucket is not tagged with 'GITC-DataClassification' key set to 'public' to enforce encryption with CMK."
+        - or:
+            - cond_type: "attribute"
+              resource_types:
+                - "AWS::S3::Bucket"
+              attribute: "Tags.GITC-DataClassification"
+              operator: "not_equals"
+              value: "public"
+              # Check if the S3 bucket is not tagged with 'GITC-DataClassification' key set to 'public' to enforce encryption with CMK."
+
+            - cond_type: "attribute"
+              resource_types:
+                - "AWS::S3::Bucket"
+              attribute: "Tags.GITC-DataClassification"
+              operator: "not_exists"
+              # Check if the 'GITC-DataClassification' tag does not exist to enforce encryption with CMK.
 
         - and:
             - cond_type: "attribute"
