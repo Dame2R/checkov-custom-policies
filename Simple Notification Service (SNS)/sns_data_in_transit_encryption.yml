@@ -1,0 +1,34 @@
+metadata:
+  name: "Enforce Encryption in Transit for SNS Topics"
+  id: "CKV_AWS_CUSTOM_038"
+  category: "general_security"
+  guidelines: "It is mandatory that you use enforce data in-transit encryption via a topic policy condition by denying access to non-secure transport requests."
+  severity: "critical"
+
+scope:
+  provider: "aws"
+
+definition:
+  and:
+      - cond_type: "attribute"
+        resource_types:
+          - "AWS::SNS::TopicPolicy"
+        attribute: "PolicyDocument.Statement"
+        operator: "exists"
+        # Ensure that the topic policy contains statements.
+
+      - cond_type: "attribute"
+        resource_types:
+          - "AWS::SNS::TopicPolicy"
+        attribute: "PolicyDocument.Statement.Effect"
+        operator: "equals"
+        value: "Deny"
+        # Ensure that the topic policy contains a "Deny" statement.
+
+      - cond_type: "attribute"
+        resource_types:
+          - "AWS::SNS::TopicPolicy"
+        attribute: "PolicyDocument.Statement.Condition.Bool.aws:SecureTransport"
+        operator: "equals"
+        value: "false"
+        # Ensure that the "Deny" statement enforces encryption in transit by checking if aws:SecureTransport is set to false.

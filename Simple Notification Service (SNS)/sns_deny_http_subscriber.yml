@@ -1,0 +1,35 @@
+metadata:
+  name: "Deny HTTP subscriptions and receiving messages via HTTP on SNS topics"
+  id: "CKV_AWS_CUSTOM_040"
+  category: "general_security"
+  guidelines: "Ensure SNS topic policies deny subscriptions and message receiving over HTTP to enforce encryption in transit."
+  severity: "critical"
+
+scope:
+  provider: "aws"
+
+definition:
+  and:
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::SNS::TopicPolicy"
+      attribute: "PolicyDocument.Statement.Effect"
+      operator: "equals"
+      value: "Deny"
+      # Ensures that the statement has a "Deny" effect.
+
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::SNS::TopicPolicy"
+      attribute: "PolicyDocument.Statement.Action"
+      operator: "contains"
+      value: ["SNS:Subscribe", "SNS:Receive"]
+      # Checks if the action contains either "SNS:Subscribe" or "SNS:Receive".
+
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::SNS::TopicPolicy"
+      attribute: "PolicyDocument.Statement.Condition.StringEquals.SNS:Protocol"
+      operator: "equals"
+      value: "http"
+      # Ensures that the condition requires the SNS protocol to be HTTP.

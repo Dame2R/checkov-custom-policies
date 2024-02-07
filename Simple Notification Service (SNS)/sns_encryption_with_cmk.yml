@@ -1,0 +1,25 @@
+metadata:
+  name: "Implement serverside encryption with CMK"
+  id: "CKV_AWS_CUSTOM_037"
+  category: "encryption"
+  guidelines: "It is mandatory that you encrypt your SNS topics via a CMK. https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html"
+  severity: "medium"
+
+scope:
+  provider: "aws"
+
+definition:
+  and:
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::SNS::Topic"
+      attribute: "KmsMasterKeyId"
+      operator: "exists"
+      # Checks if a CMK is being used.
+
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::SNS::Topic"
+      attribute: "KmsMasterKeyId"
+      operator: "is_not_empty"
+      # Ensures the CMK is not empty.

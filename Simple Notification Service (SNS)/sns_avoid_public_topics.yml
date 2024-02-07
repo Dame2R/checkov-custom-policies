@@ -1,0 +1,33 @@
+metadata:
+  name: "Ensure SNS topics are not publicly accessible"
+  id: "CKV_AWS_CUSTOM_039"
+  category: "general_security"
+  guidelines: "It is mandatory that the SNS topic is not public to send or receive messages. Ensure that the topic policy does not grant permissions to a wildcard principal."
+  severity: "critical"
+
+scope:
+  provider: "aws"
+
+definition:
+  and:
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::SNS::TopicPolicy"
+      attribute: "PolicyDocument.Statement"
+      operator: "exists"
+      # Ensures that the SNS topic policy contains statements.
+
+    - cond_type: "block"
+      resource_types:
+        - "AWS::SNS::TopicPolicy"
+      block_name: "PolicyDocument.Statement"
+      operator: "exists"
+      # Ensures that the policy document contains statements.
+
+    - cond_type: "attribute"
+      resource_types:
+        - "AWS::SNS::TopicPolicy"
+      attribute: "PolicyDocument.Statement.Principal"
+      operator: "not_equals"
+      value: "*"
+      # Ensures that none of the statements grant permissions to a wildcard principal.

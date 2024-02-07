@@ -22,4 +22,4 @@ definition:
         - "AWS::ApiGateway::Stage"
       attribute: "ClientCertificateId"
       operator: "is_not_empty"
-      # Ensures the
+      # Ensures the client certificate is not empty.
