@@ -18,25 +18,25 @@ definition:
       value: "PRIVATE"
       # If the endpoints are not private, a VPC endpoint can't be configured.
 
-    and:
-      - cond_type: "attribute"
-        resource_types:
-          - "AWS::ApiGateway::RestApi"
-        attribute: "EndpointConfiguration.Types"
-        operator: "contains"
-        value: "PRIVATE"
-        # Ensures API endpoints are private
+    - and:
+        - cond_type: "attribute"
+          resource_types:
+            - "AWS::ApiGateway::RestApi"
+          attribute: "EndpointConfiguration.Types"
+          operator: "contains"
+          value: "PRIVATE"
+          # Ensures API endpoints are private
 
-      - cond_type: "attribute"
-        resource_types:
-          - "AWS::ApiGateway::RestApi"
-        attribute: "EndpointConfiguration.VpcEndpointIds"
-        operator: "exists"
-        # Checks if VPC Endpoints are defined
-      
-      - cond_type: "attribute"
-        resource_types:
-          - "AWS::ApiGateway::RestApi"
-        attribute: "EndpointConfiguration.VpcEndpointIds"
-        operator: "is_not_empty"
-        # Ensures a definition of VPC Endpoints
+        - cond_type: "attribute"
+          resource_types:
+            - "AWS::ApiGateway::RestApi"
+          attribute: "EndpointConfiguration.VpcEndpointIds"
+          operator: "exists"
+          # Checks if VPC Endpoints are defined
+        
+        - cond_type: "attribute"
+          resource_types:
+            - "AWS::ApiGateway::RestApi"
+          attribute: "EndpointConfiguration.VpcEndpointIds"
+          operator: "is_not_empty"
+          # Ensures a definition of VPC Endpoints

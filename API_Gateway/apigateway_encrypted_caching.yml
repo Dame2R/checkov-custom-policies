@@ -18,19 +18,19 @@ definition:
       value: false
       # If caching is disabled, no data encryption is required.
 
-    and:
-      - cond_type: "attribute"
-        resource_types:
-          - "AWS::ApiGateway::Stage"
-        attribute: "MethodSettings.CachingEnabled"
-        operator: "equals"
-        value: true
-        # Checks if caching is enabled.
+    - and:
+        - cond_type: "attribute"
+          resource_types:
+            - "AWS::ApiGateway::Stage"
+          attribute: "MethodSettings.CachingEnabled"
+          operator: "equals"
+          value: true
+          # Checks if caching is enabled.
 
-      - cond_type: "attribute"
-        resource_types:
-          - "AWS::ApiGateway::Stage"
-        attribute: "MethodSettings.CachingConfig.DataEncrypted"
-        operator: "equals"
-        value: true
-        # Ensures caching data is encrypted.
+        - cond_type: "attribute"
+          resource_types:
+            - "AWS::ApiGateway::Stage"
+          attribute: "MethodSettings.CachingConfig.DataEncrypted"
+          operator: "equals"
+          value: true
+          # Ensures caching data is encrypted.
