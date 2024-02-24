@@ -15,7 +15,7 @@ definition:
         - "AWS::Lambda::Function"
       connected_resource_types: 
         - "AWS::Lambda::Url"
-      operator: "exists"
+      operator: exists
       # Checks for a connection between the Lambda function and its URL configuration.
 
     - cond_type: "attribute"
@@ -30,5 +30,5 @@ definition:
       resource_types:
         - "AWS::Lambda::Url"
       attribute: "Cors"
-      operator: "exists"
+      operator: exists
       # This checks if the Lambda URL resource has the CORS configuration set.

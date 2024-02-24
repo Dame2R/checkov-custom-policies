@@ -40,7 +40,7 @@ definition:
               resource_types:
                 - "AWS::S3::Bucket"
               attribute: "BucketEncryption.ServerSideEncryptionConfiguration"
-              operator: "exists"
+              operator: exists
               # Ensure that the bucket has server-side encryption configuration.
 
             - cond_type: "attribute"
@@ -55,7 +55,7 @@ definition:
               resource_types:
                 - "AWS::S3::Bucket"
               attribute: "BucketEncryption.ServerSideEncryptionConfiguration.ServerSideEncryptionByDefault.KMSMasterKeyID"
-              operator: "exists"
+              operator: exists
               # Ensure that a valid KMSMasterKeyID is set.
 
             - cond_type: "attribute"

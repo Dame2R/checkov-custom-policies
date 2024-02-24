@@ -14,7 +14,7 @@ definition:
       resource_types: 
         - "AWS::Lambda::Function"
       attribute: "Properties.Role"
-      operator: "exists"
+      operator: exists
       # Check if the Lambda function has an execution role specified.
 
     - and:
@@ -23,7 +23,7 @@ definition:
             - "AWS::Lambda::Function"
           connected_resource_types: 
             - "AWS::IAM::Role"
-          operator: "exists"
+          operator: exists
           # Check if the execution role exists.
 
         - cond_type: "attribute"
@@ -52,7 +52,7 @@ definition:
           connected_resource_types: 
             - "AWS::IAM::Policy"
             - "AWS::IAM::ManagedPolicy"
-          operator: "exists"
+          operator: exists
           # Check for associated IAM policies.
 
         - cond_type: "attribute"

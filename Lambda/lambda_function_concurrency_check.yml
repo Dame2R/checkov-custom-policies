@@ -14,7 +14,7 @@ definition:
       resource_types:
         - "AWS::Lambda::Function"
       attribute: "ReservedConcurrentExecutions"
-      operator: "exists"
+      operator: exists
       # Checks if the Lambda Function has a concurrency execution limit defined.
 
     - cond_type: "attribute"

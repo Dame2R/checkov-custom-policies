@@ -14,7 +14,7 @@ definition:
       resource_types:
         - "AWS::Lambda::Function"
       attribute: "Timeout"
-      operator: "exists"
+      operator: exists
       # Ensures an individual Timeout is set 
 
 

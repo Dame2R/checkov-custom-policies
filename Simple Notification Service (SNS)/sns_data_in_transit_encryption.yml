@@ -14,7 +14,7 @@ definition:
         resource_types:
           - "AWS::SNS::TopicPolicy"
         attribute: "PolicyDocument.Statement"
-        operator: "exists"
+        operator: exists
         # Ensure that the topic policy contains statements.
 
       - cond_type: "attribute"

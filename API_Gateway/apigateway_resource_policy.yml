@@ -14,7 +14,7 @@ definition:
       resource_types:
         - "AWS::ApiGateway::RestApi"
       attribute: "Policy"
-      operator: "exists"
+      operator: exists
       # Checks if API Gateway uses a Policy
 
     - cond_type: "attribute"

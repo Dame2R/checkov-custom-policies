@@ -14,7 +14,7 @@ definition:
       resource_types:
         - "AWS::Lambda::Function"
       attribute: "Environment.KmsKeyArn"
-      operator: "exists"
+      operator: exists
       # Checks if a CMK is defined.
 
     - cond_type: "attribute"

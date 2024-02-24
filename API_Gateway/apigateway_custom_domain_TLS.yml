@@ -22,7 +22,7 @@ definition:
       resource_types:
         - "AWS::ApiGateway::DomainName"
       attribute: "SecurityPolicy"
-      operator: "exists"
+      operator: exists
       # Checks if the security policy is defined.
 
     - cond_type: "attribute"

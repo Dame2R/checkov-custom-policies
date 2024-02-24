@@ -14,7 +14,7 @@ definition:
       resource_types:
         - "AWS::ApiGateway::UsagePlan"
       attribute: "Throttle.RateLimit"
-      operator: "exists"
+      operator: exists
       # Checks if rate limit is defined.
 
     - cond_type: "attribute"
@@ -28,7 +28,7 @@ definition:
       resource_types:
         - "AWS::ApiGateway::UsagePlan"
       attribute: "Throttle.BurstLimit"
-      operator: "exists"
+      operator: exists
       # Checks if burst limit is defined.
 
     - cond_type: "attribute"

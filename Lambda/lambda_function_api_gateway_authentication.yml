@@ -15,7 +15,7 @@ definition:
         - "AWS::Lambda::Function"
       connected_resource_types: 
         - "AWS::ApiGateway::Method"
-      operator: "exists"
+      operator: exists
       # Checks if an API Gateway method is connected to the Lambda function.
 
     - cond_type: "attribute"
@@ -38,7 +38,7 @@ definition:
             - "AWS::ApiGateway::RestApi"
           connected_resource_types: 
             - "AWS::IAM::Role"
-          operator: "exists"
+          operator: exists
           # Ensures an IAM Role is connected, implying IAM-based authentication.
 
         - cond_type: "connection"
@@ -46,7 +46,7 @@ definition:
             - "AWS::ApiGateway::RestApi"
           connected_resource_types: 
             - "AWS::Cognito::UserPool"
-          operator: "exists"
+          operator: exists
           # Checks for a connected Amazon Cognito user pool, indicating Cognito-based authentication.
 
         - cond_type: "attribute"

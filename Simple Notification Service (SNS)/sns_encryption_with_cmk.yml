@@ -14,7 +14,7 @@ definition:
       resource_types:
         - "AWS::SNS::Topic"
       attribute: "KmsMasterKeyId"
-      operator: "exists"
+      operator: exists
       # Checks if a CMK is being used.
 
     - cond_type: "attribute"

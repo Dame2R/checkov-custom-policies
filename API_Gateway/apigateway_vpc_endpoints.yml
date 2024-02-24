@@ -31,7 +31,7 @@ definition:
           resource_types:
             - "AWS::ApiGateway::RestApi"
           attribute: "EndpointConfiguration.VpcEndpointIds"
-          operator: "exists"
+          operator: exists
           # Checks if VPC Endpoints are defined
         
         - cond_type: "attribute"

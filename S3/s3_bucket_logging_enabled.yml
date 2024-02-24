@@ -14,7 +14,7 @@ definition:
       resource_types:
         - "AWS::S3::Bucket"
       attribute: "LoggingConfiguration"
-      operator: "exists"
+      operator: exists
       # Ensure that logging configuration exists for the S3 bucket.
 
     - cond_type: "attribute"

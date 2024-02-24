@@ -14,7 +14,7 @@ definition:
       resource_types:
         - "AWS::ApiGateway::Stage"
       attribute: "ClientCertificateId"
-      operator: "exists"
+      operator: exists
       # Checks if client certificate is being used.
 
     - cond_type: "attribute"

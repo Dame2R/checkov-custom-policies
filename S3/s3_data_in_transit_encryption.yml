@@ -14,7 +14,7 @@ definition:
         resource_types:
           - "AWS::S3::BucketPolicy"
         attribute: "PolicyDocument.Statement"
-        operator: "exists"
+        operator: exists
         # Ensure that the bucket policy contains statements.
 
       - cond_type: "attribute"

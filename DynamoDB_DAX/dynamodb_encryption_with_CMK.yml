@@ -22,7 +22,7 @@ definition:
       resource_types:
         - "AWS::DynamoDB::Table"
       attribute: "SSESpecification.KMSMasterKeyId"
-      operator: "exists"
+      operator: exists
       # Ensures a CMK exists.
 
     - cond_type: "attribute"

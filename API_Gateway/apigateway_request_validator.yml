@@ -14,7 +14,7 @@ definition:
       resource_types:
         - "AWS::ApiGateway::Method"
       attribute: "RequestValidatorId"
-      operator: "exists"
+      operator: exists
       # Checks if a request validator is used.
 
     - cond_type: "attribute"

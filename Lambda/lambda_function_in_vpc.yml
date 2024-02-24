@@ -14,7 +14,7 @@ definition:
       resource_types:
         - "AWS::Lambda::Function"
       attribute: "VpcConfig"
-      operator: "exists"
+      operator: exists
       # Checks if the Lambda function is configured with a VPC.
 
     - or:

@@ -14,7 +14,7 @@ definition:
       resource_types:
         - "AWS::ApiGateway::Stage"
       attribute: "MethodSettings.LoggingLevel"
-      operator: "exists"
+      operator: exists
       # Checks if the Logging is defined.
 
     - cond_type: "attribute"

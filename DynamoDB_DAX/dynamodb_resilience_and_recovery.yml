@@ -14,7 +14,7 @@ definition:
       resource_types:
         - "AWS::DynamoDB::Table"
       attribute: "PointInTimeRecoverySpecification.PointInTimeRecoveryEnabled"
-      operator: "exists"
+      operator: exists
       # Checks if point in time/continous recovery is mentioned.
 
     - cond_type: "attribute"

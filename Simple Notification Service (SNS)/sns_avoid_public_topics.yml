@@ -14,14 +14,14 @@ definition:
       resource_types:
         - "AWS::SNS::TopicPolicy"
       attribute: "PolicyDocument.Statement"
-      operator: "exists"
+      operator: exists
       # Ensures that the SNS topic policy contains statements.
 
     - cond_type: "block"
       resource_types:
         - "AWS::SNS::TopicPolicy"
       block_name: "PolicyDocument.Statement"
-      operator: "exists"
+      operator: exists
       # Ensures that the policy document contains statements.
 
     - cond_type: "attribute"

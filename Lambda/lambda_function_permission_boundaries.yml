@@ -15,12 +15,12 @@ definition:
         - "AWS::Lambda::Function"
       connected_resource_types: 
         - "AWS::IAM::Role"
-      operator: "exists"
+      operator: exists
       # Checks if Lambda Function has a Execution Role connected to it.
 
     - cond_type: "attribute"
       resource_types:
         - "AWS::IAM::Role"
       attribute: "PermissionsBoundary"
-      operator: "exists"
+      operator: exists
       # Ensures there is a permissions boundary defined for the function's role.

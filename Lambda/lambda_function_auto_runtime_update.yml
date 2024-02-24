@@ -14,7 +14,7 @@ definition:
       resource_types:
         - "AWS::Lambda::Function"
       attribute: "Runtime"
-      operator: "exists"
+      operator: exists
       # Checks if the Runtime variable is used.
 
     - cond_type: "attribute"

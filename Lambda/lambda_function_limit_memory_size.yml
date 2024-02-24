@@ -14,7 +14,7 @@ definition:
       resource_types:
         - "AWS::Lambda::Function"
       attribute: "MemorySize"
-      operator: "exists"
+      operator: exists
       # Ensures a memory size is set in the IaC Template.
 
     - cond_type: "attribute"
