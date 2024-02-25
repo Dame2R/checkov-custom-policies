@@ -17,7 +17,7 @@ definition:
       operator: exists
       # Ensures that the SNS topic policy contains statements.
 
-    - cond_type: "block"
+    - cond_type: "attribute"
       resource_types:
         - "AWS::SNS::TopicPolicy"
       attribute: "PolicyDocument.Statement"
