@@ -2,7 +2,7 @@ metadata:
   name: "Ensure Lambda functions triggered by API Gateway have authentication"
   id: "CKV_AWS_CUSTOM_017"
   category: "api_security"
-  guidelines: "Lambda functions triggered by API Gateway must ensure the triggering API Gateway has appropriate authentication mechanisms, such as IAM permissions, Amazon Cognito user pools, Lambda authorizers, or API keys. This policy checks for the presence of authentication configurations in associated API Gateway resources."
+  guideline: "Lambda functions triggered by API Gateway must ensure the triggering API Gateway has appropriate authentication mechanisms, such as IAM permissions, Amazon Cognito user pools, Lambda authorizers, or API keys. This policy checks for the presence of authentication configurations in associated API Gateway resources."
   severity: "high"
 
 scope:

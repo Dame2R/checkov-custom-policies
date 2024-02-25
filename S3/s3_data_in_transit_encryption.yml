@@ -2,7 +2,7 @@ metadata:
   name: "Enforce Encryption in Transit for S3 Bucket"
   id: "CKV_AWS_CUSTOM_015"
   category: "general_security"
-  guidelines: "Enforce encryption in transit for an S3 bucket by denying access to non-secure transport requests."
+  guideline: "Enforce encryption in transit for an S3 bucket by denying access to non-secure transport requests."
   severity: "critical"
 
 scope:

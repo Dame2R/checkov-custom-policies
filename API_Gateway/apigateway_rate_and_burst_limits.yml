@@ -2,7 +2,7 @@ metadata:
   name: "Ensure API Gateway has rate and burst limit configurations"
   id: "CKV_AWS_CUSTOM_031"
   category: "api_security"
-  guidelines: "Setting rate and burst limits on API Gateway is essential to protect backend services from traffic spikes."
+  guideline: "Setting rate and burst limits on API Gateway is essential to protect backend services from traffic spikes."
   severity: "high"
 
 scope:

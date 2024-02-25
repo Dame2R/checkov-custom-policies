@@ -2,7 +2,7 @@ metadata:
   name: "Recourse based / bucket policy is restricted"
   id: "CKV_AWS_CUSTOM_002"
   category: "general_security"
-  guidelines: "It is mandatory that the resource-based / bucket policy is restricted to the principle of least privilege. https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.html "
+  guideline: "It is mandatory that the resource-based / bucket policy is restricted to the principle of least privilege. https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.html "
   severity: "high"
 
 scope:

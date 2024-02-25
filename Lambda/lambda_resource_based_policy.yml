@@ -2,7 +2,7 @@ metadata:
   name: "Ensure Lambda function policies restrict invocation to specific principals without wildcards"
   id: "CKV_AWS_CUSTOM_016"
   category: "general_security"
-  guidelines: "Lambda function policies should explicitly define principals and actions, avoiding the use of wildcards. This ensures that only specified services or entities can invoke the Lambda function, adhering to the principle of least privilege."
+  guideline: "Lambda function policies should explicitly define principals and actions, avoiding the use of wildcards. This ensures that only specified services or entities can invoke the Lambda function, adhering to the principle of least privilege."
   severity: "high"
 
 scope:

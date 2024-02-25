@@ -2,7 +2,7 @@ metadata:
   name: "Ensure Lambda functions have concurrency execution limits"
   id: "CKV_AWS_CUSTOM_022"
   category: "convention"
-  guidelines: "Lambda functions should have a concurrency execution limit to prevent reaching account-level concurrent execution limits."
+  guideline: "Lambda functions should have a concurrency execution limit to prevent reaching account-level concurrent execution limits."
   severity: "medium"
 
 scope:

@@ -2,7 +2,7 @@ metadata:
   name: "Ensure AWS Lambda function URLs require authentication and use CORS."
   id: "CKV_AWS_CUSTOM_018"
   category: "networking"
-  guidelines: "Lambda functions exposed via URLs must enforce authentication. The AuthType should not be set to 'NONE' to avoid unauthenticated access, which could lead to unpredicted costs or data exfiltration. Furthermore CORS should be enabled in the Function URL."
+  guideline: "Lambda functions exposed via URLs must enforce authentication. The AuthType should not be set to 'NONE' to avoid unauthenticated access, which could lead to unpredicted costs or data exfiltration. Furthermore CORS should be enabled in the Function URL."
   severity: "critical"
 
 scope:

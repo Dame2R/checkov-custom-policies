@@ -2,7 +2,7 @@ metadata:
   name: "Ensure SNS topics are not publicly accessible"
   id: "CKV_AWS_CUSTOM_039"
   category: "general_security"
-  guidelines: "It is mandatory that the SNS topic is not public to send or receive messages. Ensure that the topic policy does not grant permissions to a wildcard principal."
+  guideline: "It is mandatory that the SNS topic is not public to send or receive messages. Ensure that the topic policy does not grant permissions to a wildcard principal."
   severity: "critical"
 
 scope:

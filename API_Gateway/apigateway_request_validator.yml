@@ -2,7 +2,7 @@ metadata:
   name: "Ensure API Gateway methods have request parameter validation enabled"
   id: "CKV_AWS_CUSTOM_035"
   category: "api_security"
-  guidelines: "Enabling request parameter validation for API Gateway methods prevents malformed or malicious requests."
+  guideline: "Enabling request parameter validation for API Gateway methods prevents malformed or malicious requests."
   severity: "high"
 
 scope:

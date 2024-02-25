@@ -2,7 +2,7 @@ metadata:
   name: "Ensure Lambda functions use layers from approved sources only"
   id: "CKV_AWS_CUSTOM_019"
   category: "networking"
-  guidelines: "Lambda layers should come from your own AWS account or approved sources. Unapproved layers could lead to security and compliance risks."
+  guideline: "Lambda layers should come from your own AWS account or approved sources. Unapproved layers could lead to security and compliance risks."
   severity: "high"
 
 scope:

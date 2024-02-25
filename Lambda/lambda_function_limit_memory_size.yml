@@ -2,7 +2,7 @@ metadata:
   name: "Ensure Lambda functions have memory size within recommended limits"
   id: "CKV_AWS_CUSTOM_024"
   category: "convention"
-  guidelines: "Lambda functions should have memory size configured to match the workload requirements without being over-provisioned. This policy ensures a memory size is set and lays in an accepted range."
+  guideline: "Lambda functions should have memory size configured to match the workload requirements without being over-provisioned. This policy ensures a memory size is set and lays in an accepted range."
   severity: "medium"
 
 scope:

@@ -2,7 +2,7 @@ metadata:
   name: "Ensure Lambda runtime is set to update automatically"
   id: "CKV_AWS_CUSTOM_027"
   category: "convention"
-  guidelines: "Lambda functions should have the runtime update setting configured to 'Auto' to ensure they receive the latest patches and updates automatically."
+  guideline: "Lambda functions should have the runtime update setting configured to 'Auto' to ensure they receive the latest patches and updates automatically."
   severity: "medium"
 
 scope:

@@ -2,7 +2,7 @@ metadata:
   name: "Deny HTTP subscriptions and receiving messages via HTTP on SNS topics"
   id: "CKV_AWS_CUSTOM_040"
   category: "general_security"
-  guidelines: "Ensure SNS topic policies deny subscriptions and message receiving over HTTP to enforce encryption in transit."
+  guideline: "Ensure SNS topic policies deny subscriptions and message receiving over HTTP to enforce encryption in transit."
   severity: "critical"
 
 scope:

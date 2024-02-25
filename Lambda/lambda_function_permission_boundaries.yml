@@ -2,7 +2,7 @@ metadata:
   name: "Ensure Lambda functions have permissions boundaries set"
   id: "CKV_AWS_CUSTOM_021"
   category: "iam"
-  guidelines: "Lambda functions should have permissions boundaries defined to limit the maximum permissions that the function's role can grant or delegate."
+  guideline: "Lambda functions should have permissions boundaries defined to limit the maximum permissions that the function's role can grant or delegate."
   severity: "high"
 
 scope:

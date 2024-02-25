@@ -2,7 +2,7 @@ metadata:
   name: "Enforce Encryption in Transit for SNS Topics"
   id: "CKV_AWS_CUSTOM_038"
   category: "general_security"
-  guidelines: "It is mandatory that you use enforce data in-transit encryption via a topic policy condition by denying access to non-secure transport requests."
+  guideline: "It is mandatory that you use enforce data in-transit encryption via a topic policy condition by denying access to non-secure transport requests."
   severity: "critical"
 
 scope:

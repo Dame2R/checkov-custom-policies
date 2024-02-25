@@ -2,7 +2,7 @@ metadata:
   name: "Ensure API Gateway is associated with a VPC endpoint"
   id: "CKV_AWS_CUSTOM_034"
   category: "api_security"
-  guidelines: "Associating API Gateway with a VPC endpoint enhances security by keeping traffic within the AWS network."
+  guideline: "Associating API Gateway with a VPC endpoint enhances security by keeping traffic within the AWS network."
   severity: "high"
 
 scope:

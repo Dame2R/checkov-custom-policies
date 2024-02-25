@@ -2,7 +2,7 @@ metadata:
   name: "Ensure sensitive Lambda environment variables are encrypted with a CMK-KMS key"
   id: "CKV_AWS_CUSTOM_026"
   category: "encryption"
-  guidelines: "Environment variables for Lambda functions containing sensitive information should be encrypted using a KMS CMK."
+  guideline: "Environment variables for Lambda functions containing sensitive information should be encrypted using a KMS CMK."
   severity: "medium"
 
 scope:

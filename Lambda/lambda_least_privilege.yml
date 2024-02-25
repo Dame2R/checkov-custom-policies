@@ -2,7 +2,7 @@ metadata:
   name: "Enforce Least Privilege in Lambda IAM Roles"
   id: "CKV_AWS_CUSTOM_010"
   category: "iam"
-  guidelines: "Ensure Lambda function uses IAM roles which are tightly scoped to required resources and actions. Avoid using '*' in policy statements. Review AWS IAM and Lambda documentation for best practices."
+  guideline: "Ensure Lambda function uses IAM roles which are tightly scoped to required resources and actions. Avoid using '*' in policy statements. Review AWS IAM and Lambda documentation for best practices."
   severity: "high"
 
 scope:

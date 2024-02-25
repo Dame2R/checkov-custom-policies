@@ -2,7 +2,7 @@ metadata:
   name: "Ensure API Gateway cache data is encrypted"
   id: "CKV_AWS_CUSTOM_033"
   category: "api_security"
-  guidelines: "Encrypting cache data for API Gateway is mandatory when a cache is used."
+  guideline: "Encrypting cache data for API Gateway is mandatory when a cache is used."
   severity: "medium"
 
 scope:

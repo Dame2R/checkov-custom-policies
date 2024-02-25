@@ -2,7 +2,7 @@ metadata:
   name: "Implement serverside encryption with CMK"
   id: "CKV_AWS_CUSTOM_037"
   category: "encryption"
-  guidelines: "It is mandatory that you encrypt your SNS topics via a CMK. https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html"
+  guideline: "It is mandatory that you encrypt your SNS topics via a CMK. https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html"
   severity: "medium"
 
 scope:

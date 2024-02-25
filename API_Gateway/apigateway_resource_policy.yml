@@ -2,7 +2,7 @@ metadata:
   name: "Ensure API Gateway has a secure resource policy"
   id: "CKV_AWS_CUSTOM_028"
   category: "api_security"
-  guidelines: "API Gateway must have resource policies that restrict access to ensure secure invocation of APIs."
+  guideline: "API Gateway must have resource policies that restrict access to ensure secure invocation of APIs."
   severity: "high"
 
 scope:

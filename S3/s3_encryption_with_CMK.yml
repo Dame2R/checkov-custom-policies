@@ -2,7 +2,7 @@ metadata:
   name: "Ensure S3 buckets are encrypted appropriately based on GITC-DataClassification tag"
   id: "CKV_AWS_CUSTOM_014"
   category: "encryption"
-  guidelines: "S3 buckets must be encrypted according to the GITC-DataClassification tag. If tagged as 'public', no KMS Master Key (CMK) is required. If not tagged as 'public' or the tag doesn't exist, a CMK is required."
+  guideline: "S3 buckets must be encrypted according to the GITC-DataClassification tag. If tagged as 'public', no KMS Master Key (CMK) is required. If not tagged as 'public' or the tag doesn't exist, a CMK is required."
   severity: "medium"
 
 scope:

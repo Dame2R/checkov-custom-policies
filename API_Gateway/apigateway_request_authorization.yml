@@ -2,7 +2,7 @@ metadata:
   name: "Ensure API Gateway endpoints require authorization"
   id: "CKV_AWS_CUSTOM_032"
   category: "api_security"
-  guidelines: "It is mandatory that every API endpoint is protected by an authorizer or an API key for security reasons."
+  guideline: "It is mandatory that every API endpoint is protected by an authorizer or an API key for security reasons."
   severity: "high"
 
 scope:

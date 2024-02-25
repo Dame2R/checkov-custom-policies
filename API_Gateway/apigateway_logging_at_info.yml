@@ -2,7 +2,7 @@ metadata:
   name: "Ensure API Gateway stages have INFO level logging enabled"
   id: "CKV_AWS_CUSTOM_029"
   category: "api_security"
-  guidelines: "Enabling INFO level logging for API Gateway stages is mandatory for effective monitoring and auditing."
+  guideline: "Enabling INFO level logging for API Gateway stages is mandatory for effective monitoring and auditing."
   severity: "high"
 
 scope:

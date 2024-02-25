@@ -2,7 +2,7 @@ metadata:
   name: "Ensure S3 buckets have Public Access Block configuration enabled"
   id: "CKV_AWS_CUSTOM_013"
   category: "general_security"
-  guidelines: "S3 buckets should have the Public Access Block configuration enabled to prevent public access. This includes blocking public ACLs and Policies, ignoring public ACLs, and restricting public buckets."
+  guideline: "S3 buckets should have the Public Access Block configuration enabled to prevent public access. This includes blocking public ACLs and Policies, ignoring public ACLs, and restricting public buckets."
   severity: "critical"
 
 scope:
