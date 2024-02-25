@@ -20,7 +20,7 @@ definition:
     - cond_type: "block"
       resource_types:
         - "AWS::SNS::TopicPolicy"
-      block_name: "PolicyDocument.Statement"
+      attribute: "PolicyDocument.Statement"
       operator: exists
       # Ensures that the policy document contains statements.
 
